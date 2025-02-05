@@ -8,5 +8,5 @@ export interface InitiativeItem {
   ready: boolean;
   group: number;
   groupIndex: number;
-  actionPoint: string;
+  actionPoints: string;
 }

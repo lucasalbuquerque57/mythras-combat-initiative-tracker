@@ -3,7 +3,7 @@
   "version": "0.1",
   "manifest_version": 1,
   "author": "Lucas based on Seamus Finlayson original work",
-  "homepage_url": "",
+  "homepage_url": "https://github.com/lucasalbuquerque57/mythras-combat-initiative-tracker",
   "icon": "/logo.png",
   "description": "Initiative tracking with token icons and a sort button!",
   "action": {

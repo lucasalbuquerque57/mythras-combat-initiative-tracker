@@ -15,11 +15,6 @@ import {
 
 import "../tailwind.css";
 import { cn } from "../utils";
-import LinkButton from "./LinkButton";
-import { Patreon } from "../assets/Patreon";
-import { Bug } from "../assets/bug";
-import { QuestionMark } from "../assets/QuestionMark";
-import { History } from "../assets/History";
 import { removeLabel } from "../findItem";
 import addThemeToBody from "../addThemeToBody";
 
@@ -103,36 +98,8 @@ export default function Settings(): JSX.Element {
           <div>
             <h1 className="text-2xl font-light">Settings</h1>
             <p className="text-xs text-gray-400">
-              <i>Pretty Sordid Initiative Tracker</i>
+              <i>Mythras Initiative Tracker</i>
             </p>
-          </div>
-          <div className="flex gap-2">
-            <LinkButton
-              name="Patreon"
-              size="large"
-              icon={<Patreon />}
-              href={"https://www.patreon.com/SeamusFinlayson"}
-            />
-            <LinkButton
-              name="Change Log"
-              size="large"
-              icon={<History />}
-              href={"https://www.patreon.com/collection/596053"}
-            />
-            <LinkButton
-              name="Instructions"
-              size="large"
-              icon={<QuestionMark />}
-              href={
-                "https://github.com/SeamusFinlayson/initiative-tracker?tab=readme-ov-file#pretty-sordid"
-              }
-            />
-            <LinkButton
-              name="Report Bug"
-              size="large"
-              icon={<Bug />}
-              href="https://discord.gg/WMp9bky4be"
-            />
           </div>
         </div>
         <Divider></Divider>

@@ -18,6 +18,7 @@ import { focusItem } from "../findItem";
 type InitiativeListItemProps = {
   item: InitiativeItem;
   onCountChange: (count: string) => void;
+  onActionPointsChange: (ap: string) => void; // New prop
   showHidden: boolean;
   darkMode: boolean;
   selected: boolean;
@@ -26,6 +27,7 @@ type InitiativeListItemProps = {
 export function InitiativeListItem({
   item,
   onCountChange,
+  onActionPointsChange, // New prop
   showHidden,
   darkMode,
   selected,
@@ -47,6 +49,7 @@ export function InitiativeListItem({
     <ListItem
       key={item.id}
       secondaryAction={
+        <Box sx={{ display: 'flex', gap: 1 }}>
         <Input
           disableUnderline
           sx={{ width: 48 }}
@@ -86,7 +89,46 @@ export function InitiativeListItem({
           }}
           onDoubleClick={(e) => e.stopPropagation()}
         />
+        <Input
+            disableUnderline
+            sx={{ width: 48 }}
+            onFocus={(evt) => {
+              setInputHasFocus(true);
+              handleFocus(evt.target as HTMLInputElement);
+            }}
+            onBlur={() => setInputHasFocus(false)}
+            onMouseEnter={() => setInputHasHover(true)}
+            onMouseLeave={() => setInputHasHover(false)}
+            inputProps={{
+              sx: {
+                textAlign: inputHasFocus ? "center" : "center",
+                pt: "5px",
+              },
+              style: {
+                borderRadius: 8,
+                backgroundColor: inputHasFocus
+                  ? darkMode
+                    ? "rgba(0,0,0,0.4)"
+                    : "rgba(255,255,255,0.24)"
+                  : inputHasHover
+                    ? darkMode
+                      ? "rgba(0,0,0,0.15)"
+                      : "rgba(255,255,255,0.12)"
+                    : "rgba(0,0,0,0)",
+                transition: ".1s",
+              },
+            }}
+            value={item.actionPoints}
+            onChange={(e) => onActionPointsChange(e.target.value)}
+            onDoubleClick={(e) => e.stopPropagation()}
+          />
+        </Box>
       }
+      
+
+
+
+
       divider
       selected={item.active}
       sx={{

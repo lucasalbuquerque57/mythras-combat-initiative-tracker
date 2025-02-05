@@ -38,11 +38,13 @@ import useSelection from "../useSelection";
 /** Check that the item metadata is in the correct format */
 function isMetadata(
   metadata: unknown,
-): metadata is { count: string; active: boolean; actionPoint: string} {
+): metadata is { count: string; active: boolean; actionPoints?: string } {
   return (
     isPlainObject(metadata) &&
     typeof metadata.count === "string" &&
-    typeof metadata.active === "boolean"
+    typeof metadata.active === "boolean" &&
+    (typeof (metadata as any).actionPoints === 'undefined' || 
+     typeof (metadata as any).actionPoints === 'string')
   );
 }
 
@@ -128,6 +130,7 @@ export function InitiativeTracker({ role }: { role: "PLAYER" | "GM" }) {
             initiativeItems.push({
               id: item.id,
               count: metadata.count,
+              actionPoints: metadata.actionPoints ?? '2',
               url: item.image.url,
               name: item.text.plainText || item.name,
               active: metadata.active,
@@ -136,7 +139,6 @@ export function InitiativeTracker({ role }: { role: "PLAYER" | "GM" }) {
               ready: true,
               group: 0,
               groupIndex: 0,
-              actionPoint: metadata.count
             });
           }
         }
@@ -184,7 +186,7 @@ export function InitiativeTracker({ role }: { role: "PLAYER" | "GM" }) {
   }
 
   function handleDirectionClick(next = true) {
-    // Get the next index to activate 
+    // Get the next index to activate
     const sorted = sortFromOrder(initiativeItems, order);
     let newIndex =
       sorted.findIndex((initiative) => initiative.active) + (next ? 1 : -1);
@@ -252,26 +254,17 @@ export function InitiativeTracker({ role }: { role: "PLAYER" | "GM" }) {
     });
   }
 
-  function handleActionPointChange(id: string, newAP: string) {
-    // Set local items immediately
-    /* setInitiativeItems((prev) =>
-      prev.map((item) => {
-        if (item.id === id) {
-          return {
-            ...item,
-            count: newAP,
-          };
-        } else {
-          return item;
-        }
-      }),
-    ); */
-    // Sync changes over the network
+  function handleActionPointsChange(id: string, newActionPoints: string) {
+    setInitiativeItems((prev) =>
+      prev.map((item) => 
+        item.id === id ? { ...item, actionPoints: newActionPoints } : item
+      )
+    );
     OBR.scene.items.updateItems([id], (items) => {
       for (const item of items) {
         const metadata = item.metadata[getPluginId("metadata")];
         if (isMetadata(metadata)) {
-          metadata.actionPoint = newAP;
+          metadata.actionPoints = newActionPoints;
         }
       }
     });
@@ -359,9 +352,8 @@ export function InitiativeTracker({ role }: { role: "PLAYER" | "GM" }) {
               key={item.id}
               item={item}
               darkMode={themeIsDark}
-              onCountChange={(newCount) => {
-                handleInitiativeCountChange(item.id, newCount);
-              }}
+              onCountChange={(newCount) => handleInitiativeCountChange(item.id, newCount)}
+              onActionPointsChange={(newAP) => handleActionPointsChange(item.id, newAP)}
               showHidden={role === "GM"}
               selected={selection.includes(item.id)}
             />

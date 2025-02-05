@@ -95,18 +95,22 @@ export function App() {
               (item) => item.metadata[getPluginId("metadata")] === undefined,
             );
             let count = 0;
+            let actionPoints = 2;
             for (const item of items) {
               if (addToInitiative) {
                 item.metadata[getPluginId("metadata")] = {
                   count: `${count}`,
+                  actionPoints: `${actionPoints}`,
                   active: false,
                   group: role === "GM" ? 1 : 0,
                 };
                 count += 1;
+                actionPoints += 1;
               } else {
                 delete item.metadata[getPluginId("metadata")];
               }
             }
+
           });
         },
       });

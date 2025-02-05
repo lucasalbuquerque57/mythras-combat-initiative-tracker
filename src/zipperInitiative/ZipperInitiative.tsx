@@ -105,6 +105,7 @@ export function ZipperInitiative({ role }: { role: "PLAYER" | "GM" }) {
             newInitiativeItems.push({
               id: item.id,
               name: item.text.plainText || item.name,
+              actionPoints: "0",
               url: item.image.url,
               visible: item.visible,
               active: metadata.active,
