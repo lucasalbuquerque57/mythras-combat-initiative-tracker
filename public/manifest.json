@@ -1,0 +1,16 @@
+{
+  "name": "Pretty Sordid for Mythras",
+  "version": "0.1",
+  "manifest_version": 1,
+  "author": "Lucas based on Seamus Finlayson original work",
+  "homepage_url": "",
+  "icon": "/logo.png",
+  "description": "Initiative tracking with token icons and a sort button!",
+  "action": {
+    "title": "Pretty Sordid",
+    "icon": "/icon.svg",
+    "popover": "/src/action/action.html",
+    "height": 129,
+    "width": 250
+  }
+}
