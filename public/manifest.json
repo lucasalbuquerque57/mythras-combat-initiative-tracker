@@ -7,7 +7,7 @@
   "icon": "/logo.png",
   "description": "Initiative tracking with token icons and a sort button!",
   "action": {
-    "title": "Pretty Mythras",
+    "title": "Pretty Sordid for Mythras",
     "icon": "/icon.svg",
     "popover": "/src/action/action.html",
     "height": 129,
