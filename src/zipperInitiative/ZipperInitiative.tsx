@@ -250,7 +250,7 @@ export function ZipperInitiative({ role }: { role: "PLAYER" | "GM" }) {
   }
 
   const zoomMargin = 1; // scroll bar shows up at 90% page zoom w/o this
-  const roundCountHeight = 56;
+  const roundCountHeight = 52;
   const listRef0 = useRef<HTMLUListElement>(null);
   const listRef1 = useRef<HTMLUListElement>(null);
   const listRefs: React.RefObject<HTMLUListElement>[] = [listRef0, listRef1];
