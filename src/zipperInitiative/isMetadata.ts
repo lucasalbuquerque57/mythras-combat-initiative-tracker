@@ -1,6 +1,6 @@
 import { isPlainObject } from "../isPlainObject";
 
-/** Check that the item metadata is in the correct format */
+/** Check that the item metadata is in the correct format if selected*/
 export default function isMetadata(metadata: unknown): metadata is {
   count: string;
   active: boolean;
